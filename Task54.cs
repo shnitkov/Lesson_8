@@ -1,42 +1,34 @@
 ﻿// Задача 54: Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.
 
-Console.Write("Введите высоту массива: ");
-int firstLength = Convert.ToInt32(Console.ReadLine());
-Console.Write("Введите ширину массива: ");
-int secondLength = Convert.ToInt32(Console.ReadLine());
-int[,] randomArray = new int[firstLength, secondLength];
-
-void mas(int firstLength, int secondLength)
+int[,] CreateTwoDimensionArray(int firstLength, int secondLenght)
 {
-    int i, j;
-    Random rand = new Random();
-    for (i = 0; i < firstLength; i++)
-    {
-        for (j = 0; j < secondLength; j++)
-        {
-            randomArray[i, j] = rand.Next(0, 10);
-        }
-    }
+    int[,] array = new int[firstLength, secondLenght];
+
+    for (int i = 0; i < array.GetLength(0); i++)
+        for (int j = 0; j < array.GetLength(1); j++)
+            array[i, j] = new Random().Next(0, 10);
+
+    return array;
 }
 
-void printm(int[,] array)
+void PrintArray(int[,] array)
 {
-    int i, j;
-    for (i = 0; i < array.GetLength(0); i++)
-    { 
-        for (j = 0; j < array.GetLength(1); j++)
-        {
-            Console.Write($"{array[i,j]} ");
-        }
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+            Console.Write($"{array[i, j]} ");
         Console.WriteLine();
     }
-
 }
 
-mas(firstLength, secondLength);
-Console.WriteLine("\nИсходный массив: ");
-printm(randomArray);
+int[,] array = CreateTwoDimensionArray(6, 6);
+Console.ForegroundColor = ConsoleColor.Red;
+PrintArray(array);
+Console.WriteLine("Исходный двумерный массив");
+Console.ForegroundColor = ConsoleColor.White;
 
+
+int[,] randomArray = CreateTwoDimensionArray(6, 6);
 void uporyadok(int[,] array)
 {
     for (int i = 0; i < array.GetLength(0); i++)
@@ -57,5 +49,7 @@ void uporyadok(int[,] array)
 }
 
 uporyadok(randomArray);
+Console.ForegroundColor = ConsoleColor.Green;
 Console.WriteLine("\nОтсортированный массив: ");
-printm(randomArray);
+PrintArray(randomArray);
+Console.ForegroundColor = ConsoleColor.White;
